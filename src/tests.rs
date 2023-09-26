@@ -42,14 +42,14 @@ mod test {
         let y_in: i64 = 5;
         let mut example = Calculator::new(&x_in, &y_in);
 
-        assert_eq!(example.adition(), op!(checked_add, x_in, y_in));
+        assert_eq!(example.addition(), op!(checked_add, x_in, y_in));
 
         let new_x_in: i64 = 8;
         let new_y_in: i64 = 57;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
+        example.x = new_x_in;
+        example.y = new_y_in;
 
-        assert_eq!(example.adition(), op!(checked_add, new_x_in, new_y_in));
+        assert_eq!(example.addition(), op!(checked_add, new_x_in, new_y_in));
     }
     #[test]
     fn subtraction() {
@@ -61,8 +61,8 @@ mod test {
 
         let new_x_in: i64 = 13;
         let new_y_in: i64 = 21;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
+        example.x = new_x_in;
+        example.y = new_y_in;
 
         assert_eq!(example.subtraction(), op!(checked_sub, new_x_in, new_y_in));
     }
@@ -76,8 +76,8 @@ mod test {
 
         let new_x_in: i64 = 2;
         let new_y_in: i64 = 473;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
+        example.x = new_x_in;
+        example.y = new_y_in;
 
         assert_eq!(
             example.multiplication(),
@@ -94,56 +94,19 @@ mod test {
 
         let new_x_in: i64 = 458991;
         let new_y_in: i64 = 549;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
+        example.x = new_x_in;
+        example.y = new_y_in;
 
         assert_eq!(example.division(), op!(checked_div, new_x_in, new_y_in));
     }
-    #[test]
-    fn euclidean_reminder() {
-        let x_in: i64 = 1;
-        let y_in: i64 = 5;
-        let mut example = Calculator::new(&x_in, &y_in);
 
-        assert_eq!(
-            example.euclidean_reminder(),
-            op!(checked_rem_euclid, x_in, y_in)
-        );
-
-        let new_x_in: i64 = 458991;
-        let new_y_in: i64 = 549;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
-
-        assert_eq!(
-            example.euclidean_reminder(),
-            op!(checked_rem_euclid, new_x_in, new_y_in)
-        );
-    }
-    #[test]
-    fn absolute_value() {
-        let x_in: i64 = -61461;
-        let y_in: i64 = 1661181;
-        let mut example = Calculator::new(&x_in, &y_in);
-
-        assert_eq!(example.absolute_value_x(), op!(checked_abs, x_in));
-        assert_eq!(example.absolute_value_y(), op!(checked_abs, y_in));
-
-        let new_x_in: i64 = 458991;
-        let new_y_in: i64 = -549;
-        example.change_x(&new_x_in);
-        example.change_y(&new_y_in);
-
-        assert_eq!(example.absolute_value_x(), op!(checked_abs, new_x_in));
-        assert_eq!(example.absolute_value_y(), op!(checked_abs, new_y_in));
-    }
     #[test]
     fn overflow_add() {
         let x_in: i64 = i64::MAX;
         let y_in: i64 = 1;
         let example = Calculator::new(&x_in, &y_in);
 
-        assert_eq!(example.adition(), op!(checked_add, x_in, y_in));
+        assert_eq!(example.addition(), op!(checked_add, x_in, y_in));
     }
     #[test]
     fn overflow_sub() {
@@ -169,26 +132,7 @@ mod test {
 
         assert_eq!(example.division(), op!(checked_div, x_in, y_in));
     }
-    #[test]
-    fn overflow_mod() {
-        let x_in: i64 = i64::MIN;
-        let y_in: i64 = -1;
-        let example = Calculator::new(&x_in, &y_in);
 
-        assert_eq!(
-            example.euclidean_reminder(),
-            op!(checked_rem_euclid, x_in, y_in)
-        );
-    }
-    #[test]
-    fn overflow_abs() {
-        let x_in: i64 = i64::MIN;
-        let y_in: i64 = -1;
-        let example = Calculator::new(&x_in, &y_in);
-
-        assert_eq!(example.absolute_value_x(), op!(checked_abs, x_in));
-        assert_eq!(example.absolute_value_y(), op!(checked_abs, y_in));
-    }
     #[test]
     fn zero_div() {
         let x_in: i64 = 58;
@@ -197,85 +141,107 @@ mod test {
 
         assert_eq!(example.division(), op!(checked_div, x_in, y_in));
     }
-    #[test]
-    fn zero_mod() {
-        let x_in: i64 = i64::MAX;
-        let y_in: i64 = 0;
-        let example = Calculator::new(&x_in, &y_in);
 
-        assert_eq!(
-            example.euclidean_reminder(),
-            op!(checked_rem_euclid, x_in, y_in)
-        );
-    }
     #[test]
-    fn rectangle_area_1() {
+    fn rectangle_area() {
         let a_in: f64 = 15.0;
         let b_in: f64 = 7.0;
-        let rectangle = Rectangle::new(&a_in, &b_in);
+        let rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
 
         assert_eq!(rectangle.area(), area!(a_in, b_in));
     }
     #[test]
-    fn rectangle_area_2() {
-        let a_in: f64 = 7.0;
-        let b_in: f64 = 3.0;
-        let mut rectangle = Rectangle::new(&a_in, &b_in);
+    fn rectangle_wrong_input() {
+        let a_in: f64 = 5.0;
+        let b_in: f64 = 7.0;
+        let mut rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
+
+        let new_a_in: f64 = -5.0;
+        let set_result = rectangle.set_a(&new_a_in);
+
+        assert_eq!(
+            set_result.err(),
+            Some("Rectangle sides must be greater or equal to zero!")
+        );
+    }
+    #[test]
+    fn rectangle_area_with_set() {
+        let a_in: f64 = 51.0;
+        let b_in: f64 = 23.0;
+        let mut rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
 
         assert_eq!(rectangle.area(), area!(a_in, b_in));
 
         let new_a_in: f64 = 8.0;
-        rectangle.change_a(&new_a_in);
+        let res = rectangle.set_a(&new_a_in);
+        assert!(res.is_ok());
 
         assert_eq!(rectangle.area(), area!(new_a_in, b_in));
 
         let new_b_in: f64 = 5.0;
-        rectangle.change_b(&new_b_in);
+        let res = rectangle.set_b(&new_b_in);
+        assert!(res.is_ok());
 
         assert_eq!(rectangle.area(), area!(new_a_in, new_b_in));
     }
     #[test]
-    fn circle_area_1() {
+    fn circle_area() {
         let r_in: f64 = 4.0;
-        let circle = Circle::new(&r_in);
+        let circle = Circle::try_new(&r_in).unwrap();
 
-        assert_eq!(circle.area(), area!(r_in));
+        assert_eq!(circle.area(), area!(r_in)); // an error here will disappear once you implement the area method for Circle
     }
     #[test]
-    fn circle_area_2() {
-        let r_in: f64 = 4.0;
-        let mut circle = Circle::new(&r_in);
+    fn circle_wrong_input() {
+        let r_in: f64 = 5.0;
+        let mut circle = Circle::try_new(&r_in).unwrap();
 
-        assert_eq!(circle.area(), area!(r_in));
+        let new_r_in: f64 = -5.0;
+        let set_result = circle.set_r(&new_r_in);
+
+        assert_eq!(
+            set_result.err(),
+            Some("Circle radius must be greater or equal to zero!")
+        );
+    }
+    #[test]
+    fn circle_area_with_set() {
+        let r_in: f64 = 17.0;
+        let mut circle = Circle::try_new(&r_in).unwrap();
+
+        assert_eq!(circle.area(), area!(r_in)); // an error here will disappear once you implement the Shape trait for Circle
 
         let new_r_in: f64 = 8.0;
-        circle.change_r(&new_r_in);
+        let res = circle.set_r(&new_r_in); // an error here will disappear once you implement the set_r method for Circle
+        assert!(res.is_ok());
 
-        assert_eq!(circle.area(), area!(new_r_in));
+        assert_eq!(circle.area(), area!(new_r_in)); // an error here will disappear once you implement the Shape trait for Circle
     }
     #[test]
-    fn rectangle_circumference_1() {
+    fn rectangle_circumference() {
         let a_in: f64 = 15.0;
         let b_in: f64 = 7.0;
-        let rectangle = Rectangle::new(&a_in, &b_in);
+        let rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
 
         assert_eq!(rectangle.circumference(), circumference!(a_in, b_in));
     }
     #[test]
-    fn rectangle_circumference_2() {
-        let a_in: f64 = 7.0;
-        let b_in: f64 = 3.0;
-        let mut rectangle = Rectangle::new(&a_in, &b_in);
+    fn rectangle_circumference_with_set() {
+        let a_in: f64 = 584.0;
+        let b_in: f64 = 1287.0;
+        let mut rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
 
         assert_eq!(rectangle.circumference(), circumference!(a_in, b_in));
 
         let new_a_in: f64 = 8.0;
-        rectangle.change_a(&new_a_in);
+        let res = rectangle.set_a(&new_a_in);
+        assert!(res.is_ok());
 
         assert_eq!(rectangle.circumference(), circumference!(new_a_in, b_in));
 
         let new_b_in: f64 = 8.0;
-        rectangle.change_b(&new_b_in);
+        let res = rectangle.set_b(&new_b_in);
+        assert!(res.is_ok());
 
         assert_eq!(
             rectangle.circumference(),
@@ -283,41 +249,36 @@ mod test {
         );
     }
     #[test]
-    fn circle_circumference_1() {
+    fn circle_circumference() {
         let r_in: f64 = 7.0;
-        let circle = Circle::new(&r_in);
+        let circle = Circle::try_new(&r_in).unwrap();
 
-        assert_eq!(circle.circumference(), circumference!(r_in));
+        assert_eq!(circle.circumference(), circumference!(r_in)); // an error here will disappear once you implement the Shape trait for Circle
     }
     #[test]
-    fn circle_circumference_2() {
-        let r_in: f64 = 4.0;
-        let mut circle = Circle::new(&r_in);
+    fn circle_circumference_with_set() {
+        let r_in: f64 = 3.0;
+        let mut circle = Circle::try_new(&r_in).unwrap();
 
-        assert_eq!(circle.circumference(), circumference!(r_in));
+        assert_eq!(circle.circumference(), circumference!(r_in)); // an error here will disappear once you implement the Shape trait for Circle
 
         let new_r_in: f64 = 8.0;
-        circle.change_r(&new_r_in);
+        let res = circle.set_r(&new_r_in); // an error here will disappear once you implement the set_r method for Circle
+        assert!(res.is_ok());
 
-        assert_eq!(circle.circumference(), circumference!(new_r_in));
+        assert_eq!(circle.circumference(), circumference!(new_r_in)); // an error here will disappear once you implement the Shape trait for Circle
     }
     #[test]
-    fn random_inputs_arithmetic() {
+    fn random_inputs_calculator() {
         let mut rng = rand::thread_rng();
         for _ in 0..50000 {
             let x_in: i64 = rng.gen();
             let y_in: i64 = rng.gen();
             let example = Calculator::new(&x_in, &y_in);
-            assert_eq!(example.adition(), op!(checked_add, x_in, y_in));
+            assert_eq!(example.addition(), op!(checked_add, x_in, y_in));
             assert_eq!(example.subtraction(), op!(checked_sub, x_in, y_in));
             assert_eq!(example.multiplication(), op!(checked_mul, x_in, y_in));
             assert_eq!(example.division(), op!(checked_div, x_in, y_in));
-            assert_eq!(
-                example.euclidean_reminder(),
-                op!(checked_rem_euclid, x_in, y_in)
-            );
-            assert_eq!(example.absolute_value_x(), op!(checked_abs, x_in));
-            assert_eq!(example.absolute_value_y(), op!(checked_abs, y_in));
         }
     }
     #[test]
@@ -328,13 +289,30 @@ mod test {
             let b_in: f64 = rng.gen();
             let r_in: f64 = rng.gen();
 
-            let circle = Circle::new(&r_in);
-            let rectangle = Rectangle::new(&a_in, &b_in);
+            let circle = Circle::try_new(&r_in);
+            let rectangle = Rectangle::try_new(&a_in, &b_in);
 
-            assert_eq!(circle.circumference(), circumference!(r_in));
-            assert_eq!(circle.area(), area!(r_in));
-            assert_eq!(rectangle.circumference(), circumference!(a_in, b_in));
-            assert_eq!(rectangle.area(), area!(a_in, b_in));
+            if r_in < 0.0 {
+                assert_eq!(
+                    circle.err(),
+                    Some("Circle radius must be greater or equal to zero!")
+                );
+            } else {
+                let circle = circle.unwrap();
+                assert_eq!(circle.circumference(), circumference!(r_in)); // an error here will disappear once you implement the Shape trait for Circle
+                assert_eq!(circle.area(), area!(r_in)); // an error here will disappear once you implement the Shape trait for Circle
+            }
+
+            if a_in < 0.0 || b_in < 0.0 {
+                assert_eq!(
+                    rectangle.err(),
+                    Some("Rectangle sides must be greater or equal to zero!")
+                );
+            } else {
+                let rectangle = rectangle.unwrap();
+                assert_eq!(rectangle.circumference(), circumference!(a_in, b_in));
+                assert_eq!(rectangle.area(), area!(a_in, b_in));
+            }
         }
     }
 }

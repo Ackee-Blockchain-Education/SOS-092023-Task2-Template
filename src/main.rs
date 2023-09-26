@@ -1,16 +1,22 @@
+// The task is to add code everywhere where you find // TODO.
+// You have to finish the implementation of the methods of Calculator, Rectangle and Circle structs.
+// The code does not compile yet, because some of the required methods are missing - you have to add them.
+// Once you complete the TODOs, make sure that you delete all `todo!()` macros and
+// you can try to run the tests using `cargo test` command and start debugging ;-)
+
+#![allow(dead_code)]
+
+use std::fmt;
 mod tests;
 
 // ------------------------------------------------------------------------------------------------
 // Traits
 //
-/// Trait Shape provides basic formulas for various shapes.
+/// Trait Shape defines basic shared methods for various shapes.
+/// More information can be found here: https://doc.rust-lang.org/book/ch10-02-traits.html
 pub trait Shape {
     fn area(&self) -> f64;
     fn circumference(&self) -> f64;
-}
-/// Trait Display provides display function that can be derived for every struct.
-pub trait Display {
-    fn display(&self);
 }
 // ------------------------------------------------------------------------------------------------
 // Structs
@@ -18,8 +24,8 @@ pub trait Display {
 /// The struct Calculator stores two operands, can perform simple math operations,
 /// and is also resilient to overflow and underflow.
 pub struct Calculator {
-    x: i64,
-    y: i64,
+    pub x: i64,
+    pub y: i64,
 }
 /// The struct Rectangle stores both sides and can compute area and
 /// circumference for itself.
@@ -41,176 +47,92 @@ impl Calculator {
         Self { x: *arg1, y: *arg2 }
     }
     /// Addition with Underflow/Overflow Resilience
-    pub fn adition(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
+    pub fn addition(&self) -> Option<i64> {
+        // TODO Implement addition of calculator's x and y values.
+        // Notice the Option<i64> return type: https://doc.rust-lang.org/std/option/index.html
+        // Return None in case of under/overflow.
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
     /// Subtraction with Underflow/Overflow Resilience
     pub fn subtraction(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
+        // TODO Implement subtraction of calculator's x and y values.
+        // Return None in case of under/overflow.
+        // Try to check the documentation of i64 type if you find some useful methods: https://doc.rust-lang.org/std/primitive.i64.html#implementations
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
     /// Multiplication with Underflow/Overflow Resilience
     pub fn multiplication(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
+        // TODO Implement multiplication of calculator's x and y values.
+        // Return None in case of under/overflow.
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
     /// Division with Underflow/Overflow Resilience
     pub fn division(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
-    }
-    /// Euclidean Reminder with Underflow/Overflow Resilience
-    pub fn euclidean_reminder(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
-    }
-    /// Absolute Value for X operand with Underflow/Overflow Resilience
-    pub fn absolute_value_x(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
-    }
-    /// Absolute Value for Y operand with Underflow/Overflow Resilience
-    pub fn absolute_value_y(&self) -> Option<i64> {
-        // TODO!
-        // Some(0) is implemented only for the source code to compile
-        // you are supposed to modify it!
-        Some(0)
-    }
-    /// Update X operand or Setter for X
-    pub fn change_x(&mut self, x: &i64) {
-        // TODO
-    }
-    /// Update Y operand or Setter for Y
-    pub fn change_y(&mut self, y: &i64) {
-        // TODO
-    }
-    /// Read X operand or Getter for X
-    pub fn get_x(&self) -> i64 {
-        self.x
-    }
-    /// Read Y operand or Getter for Y
-    pub fn get_y(&self) -> i64 {
-        self.y
+        // TODO Implement division of calculator's x and y values.
+        // Return None in case of division by zero.
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
 }
 impl Rectangle {
     /// Constructor
-    pub fn new(arg1: &f64, arg2: &f64) -> Self {
-        Self { a: *arg1, b: *arg2 }
+    pub fn try_new(arg1: &f64, arg2: &f64) -> Result<Self, &'static str> {
+        if *arg1 >= 0.0 && *arg2 >= 0.0 {
+            Ok(Self { a: *arg1, b: *arg2 })
+        } else {
+            Err("Rectangle sides must be greater or equal to zero!")
+        }
     }
-    /// Update side A or Setter for A
-    pub fn change_a(&mut self, a: &f64) {
-        // TODO
+    /// Set side a
+    pub fn set_a(&mut self, a: &f64) -> Result<(), &'static str> {
+        // TODO Implement the setter method and set the field `a` of the Rectangle struct
+        // Notice that the fields a and b of Rectangle struct are private and can be access only by Rectangles methods
+        // If the parameter is greater or equal to zero, update it and return Ok(())
+        // otherwise return an Err (similar to try_new method)
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
-    /// Update side B or Setter for B
-    pub fn change_b(&mut self, b: &f64) {
-        // TODO
+    /// Set side b
+    pub fn set_b(&mut self, a: &f64) -> Result<(), &'static str> {
+        // TODO Implement the setter method and set the field `b` of the Rectangle struct
+        // Notice that the fields a and b of Rectangle struct are private and can be access only by Rectangles methods
+        // If the parameter is greater or equal to zero, update it and return Ok(())
+        // otherwise return an Err (similar to try_new method)
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
-    /// Read side A or Getter for A
+    /// Get for A
     pub fn get_a(&self) -> f64 {
         self.a
     }
-    /// Read side B or Getter for B
+    /// Get for B
     pub fn get_b(&self) -> f64 {
         self.b
     }
 }
 impl Circle {
     /// Constructor
-    pub fn new(arg1: &f64) -> Self {
-        Self { r: *arg1 }
+    pub fn try_new(arg1: &f64) -> Result<Self, &'static str> {
+        if *arg1 >= 0.0 {
+            Ok(Self { r: *arg1 })
+        } else {
+            Err("Circle radius must be greater or equal to zero!")
+        }
     }
-    /// Update Radius or Setter for Radius
-    pub fn change_r(&mut self, r: &f64) {
-        // TODO
-    }
-    /// Read Radius or Getter for Radius
+
+    // TODO Create and implement the setter method called `set_r` and set the field `r` of the Circle struct
+    // If the parameter is greater or equal to zero, update it and return Ok(())
+    // otherwise return an Err (similar to try_new method)
+
+    /// Get for Radius
     pub fn get_r(&self) -> f64 {
         self.r
     }
 }
-// ------------------------------------------------------------------------------------------------
-// Trait Display implementations for Structs
-//
-impl Display for Calculator {
-    fn display(&self) {
-        println!("-----------------------------------------------------------------");
-        println!("Printing Calculator results");
-        println!(
-            "{} + {} = {}",
-            self.get_x(),
-            self.get_y(),
-            self.adition().unwrap()
-        );
-        println!(
-            "{} - {} = {}",
-            self.get_x(),
-            self.get_y(),
-            self.subtraction().unwrap()
-        );
-        println!(
-            "{} * {} = {}",
-            self.get_x(),
-            self.get_y(),
-            self.multiplication().unwrap()
-        );
-        println!(
-            "{} / {} = {}",
-            self.get_x(),
-            self.get_y(),
-            self.division().unwrap()
-        );
-        println!(
-            "{} % {} = {}",
-            self.get_x(),
-            self.get_y(),
-            self.euclidean_reminder().unwrap()
-        );
-        println!("|{}| = {}", self.get_x(), self.absolute_value_x().unwrap());
-        println!("|{}| = {}", self.get_y(), self.absolute_value_y().unwrap());
-        println!("-----------------------------------------------------------------");
-    }
-}
-impl Display for Rectangle {
-    fn display(&self) {
-        println!("-----------------------------------------------------------------");
-        println!("Printing Rectangle");
-        println!(
-            "a:{}, b:{}, area:{}, circumference:{}",
-            self.get_a(),
-            self.get_b(),
-            self.area(),
-            self.circumference(),
-        );
-        println!("-----------------------------------------------------------------");
-    }
-}
-impl Display for Circle {
-    fn display(&self) {
-        println!("-----------------------------------------------------------------");
-        println!("Printing Circle");
-        println!(
-            "r:{}, area:{}, circumference:{}",
-            self.get_r(),
-            self.area(),
-            self.circumference(),
-        );
-        println!("-----------------------------------------------------------------");
-    }
-}
+
 // ------------------------------------------------------------------------------------------------
 // Trait Shape implementations for Structs
 // Since the Calculator is not a shape, we don't implement Shape functions for the Calculator struct.
@@ -218,35 +140,19 @@ impl Display for Circle {
 impl Shape for Rectangle {
     /// Computes Area of given Rectangle
     fn area(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
+        self.a * self.b
     }
     /// Computes Circumference of given Rectangle
     fn circumference(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
+        // TODO Calculate the circumference of the rectangle.
+
+        todo!() // delete this todo!() macro once you are done with your implementation
     }
 }
-impl Shape for Circle {
-    /// Computes Area of given Circle
-    fn area(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Computes Circumference of given Circle
-    fn circumference(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-}
+
+// TODO Implement the Shape trait and its methods for the Circle struct
+// Hint: you can use std::f64::consts::PI
+
 // ------------------------------------------------------------------------------------------------
 // Examples
 //
@@ -255,48 +161,58 @@ fn calculator_example() {
     let x_in: i64 = -53;
     let y_in: i64 = 17;
     // initialize calculator instance with the initialized operands
-    let mut calculator = Calculator::new(&x_in, &y_in);
+    let calculator = Calculator::new(&x_in, &y_in);
 
-    // perform display = print operands and show operations results
-    calculator.display();
-
-    // initialize new operands
-    let new_x_in: i64 = 13;
-    let new_y_in: i64 = 7;
-
-    // changed operands within the calculator
-    calculator.change_x(&new_x_in);
-    calculator.change_y(&new_y_in);
-
-    // perform display = print operands and show operations results
-    calculator.display();
+    // print operands and show operations results
+    println!("{calculator}"); // we can use println!() macro because we have implemented the fmt::Display trait for Calculator (see below)
 }
+
 fn rectangle_example() {
     let a_in: f64 = 7.0;
     let b_in: f64 = 3.0;
-    let mut rectangle = Rectangle::new(&a_in, &b_in);
+    let mut rectangle = Rectangle::try_new(&a_in, &b_in).unwrap();
 
-    rectangle.display();
+    println!("{rectangle}"); // we can use println!() macro because we have implemented the fmt::Display trait for Rectangle (see below)
 
     let new_a_in: f64 = 15.0;
     let new_b_in: f64 = 2.0;
 
-    rectangle.change_a(&new_a_in);
-    rectangle.change_b(&new_b_in);
+    let res = rectangle.set_a(&new_a_in);
+    assert!(res.is_ok());
 
-    rectangle.display();
+    let res = rectangle.set_b(&new_b_in);
+    assert!(res.is_ok());
+
+    println!("{rectangle}");
+
+    let new_b_in: f64 = -2.0;
+
+    let res = rectangle.set_b(&new_b_in);
+    assert_eq!(
+        res.err(),
+        Some("Rectangle sides must be greater or equal to zero!")
+    );
 }
 fn circle_example() {
     let r_in: f64 = 17.0;
-    let mut circle = Circle::new(&r_in);
+    let mut circle = Circle::try_new(&r_in).unwrap();
 
-    circle.display();
+    println!("{circle}"); // we can use println!() macro because we have implemented the fmt::Display trait for Circle (see below)
 
     let new_r_in: f64 = 15.0;
 
-    circle.change_r(&new_r_in);
+    let res = circle.set_r(&new_r_in); // an error here will disappear once you implement the set_r method for Circle
+    assert!(res.is_ok());
 
-    circle.display();
+    println!("{circle}");
+
+    let new_r_in: f64 = -15.0;
+
+    let res = circle.set_r(&new_r_in); // an error here will disappear once you implement the set_r method for Circle
+    assert_eq!(
+        res.err(),
+        Some("Circle radius must be greater or equal to zero!")
+    );
 }
 // ------------------------------------------------------------------------------------------------
 // Main
@@ -305,4 +221,74 @@ fn main() {
     calculator_example();
     rectangle_example();
     circle_example();
+}
+
+// Implementing this trait for a type will automatically implement the ToString trait for the type,
+// allowing the usage of the .to_string() method. Prefer implementing the Display trait for a type,
+// rather than ToString. More info here: https://doc.rust-lang.org/std/fmt/trait.Display.html
+impl fmt::Display for Calculator {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut out =
+            "-----------------------------------------------------------------\n".to_string();
+        out.push_str("Printing Calculator results\n");
+        out.push_str(&format!(
+            "{} + {} = {}\n",
+            self.x,
+            self.y,
+            self.addition().unwrap()
+        ));
+        out.push_str(&format!(
+            "{} - {} = {}\n",
+            self.x,
+            self.y,
+            self.subtraction().unwrap()
+        ));
+        out.push_str(&format!(
+            "{} * {} = {}\n",
+            self.x,
+            self.y,
+            self.multiplication().unwrap()
+        ));
+        out.push_str(&format!(
+            "{} / {} = {}\n",
+            self.x,
+            self.y,
+            self.division().unwrap()
+        ));
+        out.push_str("-----------------------------------------------------------------\n");
+        write!(f, "{}", out)
+    }
+}
+
+impl fmt::Display for Rectangle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut out =
+            "-----------------------------------------------------------------\n".to_string();
+        out.push_str("Printing Rectangle\n");
+        out.push_str(&format!(
+            "a:{}, b:{}, area:{}, circumference:{}\n",
+            self.get_a(),
+            self.get_b(),
+            self.area(),
+            self.circumference(),
+        ));
+        out.push_str("-----------------------------------------------------------------\n");
+        write!(f, "{}", out)
+    }
+}
+
+impl fmt::Display for Circle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut out =
+            "-----------------------------------------------------------------\n".to_string();
+        out.push_str("Printing Circle\n");
+        out.push_str(&format!(
+            "r:{}, area:{}, circumference:{}\n",
+            self.get_r(),
+            self.area(), // an error here will disappear once you implement the Shape trait for Circle
+            self.circumference(), // an error here will disappear once you implement the Shape trait for Circle
+        ));
+        out.push_str("-----------------------------------------------------------------\n");
+        write!(f, "{}", out)
+    }
 }
