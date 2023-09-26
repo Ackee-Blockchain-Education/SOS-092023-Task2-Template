@@ -7,7 +7,6 @@ mod tests;
 pub trait Shape {
     fn area(&self) -> f64;
     fn circumference(&self) -> f64;
-    fn volume(&self) -> f64;
 }
 /// Trait Display provides display function that can be derived for every struct.
 pub trait Display {
@@ -32,13 +31,6 @@ pub struct Rectangle {
 /// circumference for itself.
 pub struct Circle {
     r: f64,
-}
-/// The struct Cuboid stores 3 sides and can compute volume and
-/// circumference for itself.
-pub struct Cuboid {
-    a: f64,
-    b: f64,
-    c: f64,
 }
 // ------------------------------------------------------------------------------------------------
 // Non-Trait implementations for Structs
@@ -99,11 +91,11 @@ impl Calculator {
     }
     /// Update X operand or Setter for X
     pub fn change_x(&mut self, x: &i64) {
-        self.x = *x;
+        // TODO
     }
     /// Update Y operand or Setter for Y
     pub fn change_y(&mut self, y: &i64) {
-        // TODO!
+        // TODO
     }
     /// Read X operand or Getter for X
     pub fn get_x(&self) -> i64 {
@@ -111,10 +103,7 @@ impl Calculator {
     }
     /// Read Y operand or Getter for Y
     pub fn get_y(&self) -> i64 {
-        // TODO!
-        // 0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0
+        self.y
     }
 }
 impl Rectangle {
@@ -124,18 +113,15 @@ impl Rectangle {
     }
     /// Update side A or Setter for A
     pub fn change_a(&mut self, a: &f64) {
-        // TODO!
+        // TODO
     }
     /// Update side B or Setter for B
     pub fn change_b(&mut self, b: &f64) {
-        self.b = *b;
+        // TODO
     }
     /// Read side A or Getter for A
     pub fn get_a(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
+        self.a
     }
     /// Read side B or Getter for B
     pub fn get_b(&self) -> f64 {
@@ -149,57 +135,11 @@ impl Circle {
     }
     /// Update Radius or Setter for Radius
     pub fn change_r(&mut self, r: &f64) {
-        // TODO!
+        // TODO
     }
     /// Read Radius or Getter for Radius
     pub fn get_r(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-}
-impl Cuboid {
-    /// Constructor
-    pub fn new(arg1: &f64, arg2: &f64, arg3: &f64) -> Self {
-        Self {
-            a: *arg1,
-            b: *arg2,
-            c: *arg3,
-        }
-    }
-    /// Update side A or Setter for A
-    pub fn change_a(&mut self, a: &f64) {
-        // TODO!
-    }
-    /// Update side B or Setter for B
-    pub fn change_b(&mut self, b: &f64) {
-        self.b = *b;
-    }
-    /// Update side C or Setter for C
-    pub fn change_c(&mut self, c: &f64) {
-        // TODO!
-    }
-    /// Read side A or Getter for A
-    pub fn get_a(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Read side B or Getter for B
-    pub fn get_b(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Read side C or Getter for C
-    pub fn get_c(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
+        self.r
     }
 }
 // ------------------------------------------------------------------------------------------------
@@ -271,22 +211,6 @@ impl Display for Circle {
         println!("-----------------------------------------------------------------");
     }
 }
-impl Display for Cuboid {
-    fn display(&self) {
-        println!("-----------------------------------------------------------------");
-        println!("Printing Cuboid");
-        println!(
-            "a:{}, b:{}, c:{}, surface area:{}, circumference:{}, volume:{}",
-            self.get_a(),
-            self.get_b(),
-            self.get_c(),
-            self.area(),
-            self.circumference(),
-            self.volume(),
-        );
-        println!("-----------------------------------------------------------------");
-    }
-}
 // ------------------------------------------------------------------------------------------------
 // Trait Shape implementations for Structs
 // Since the Calculator is not a shape, we don't implement Shape functions for the Calculator struct.
@@ -306,11 +230,6 @@ impl Shape for Rectangle {
         // you are supposed to modify it!
         0.0
     }
-    /// Rectangle is 2D Shape so we don`t compute it`s volume, but it has to be
-    /// defined as it is declared in the Shape Trait
-    fn volume(&self) -> f64 {
-        0.0
-    }
 }
 impl Shape for Circle {
     /// Computes Area of given Circle
@@ -322,34 +241,6 @@ impl Shape for Circle {
     }
     /// Computes Circumference of given Circle
     fn circumference(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Circle is 2D Shape so we don`t compute it`s volume, but it has to be
-    /// defined as it is declared in the Shape Trait
-    fn volume(&self) -> f64 {
-        0.0
-    }
-}
-impl Shape for Cuboid {
-    /// Compute Surface Area of given Cuboid
-    fn area(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Compute Circumference of given Cuboid (circumference af all edges)
-    fn circumference(&self) -> f64 {
-        // TODO!
-        // 0.0 is implemented only for the source code to compile
-        // you are supposed to modify it!
-        0.0
-    }
-    /// Compute Volume of given Cuboid
-    fn volume(&self) -> f64 {
         // TODO!
         // 0.0 is implemented only for the source code to compile
         // you are supposed to modify it!
@@ -395,7 +286,6 @@ fn rectangle_example() {
 
     rectangle.display();
 }
-
 fn circle_example() {
     let r_in: f64 = 17.0;
     let mut circle = Circle::new(&r_in);
@@ -408,25 +298,6 @@ fn circle_example() {
 
     circle.display();
 }
-fn cuboid_example() {
-    let a_in: f64 = 7.0;
-    let b_in: f64 = 3.0;
-    let c_in: f64 = 15.0;
-
-    let mut cuboid = Cuboid::new(&a_in, &b_in, &c_in);
-
-    cuboid.display();
-
-    let new_a_in: f64 = 15.0;
-    let new_b_in: f64 = 2.0;
-    let new_c_in: f64 = 3.5;
-
-    cuboid.change_a(&new_a_in);
-    cuboid.change_b(&new_b_in);
-    cuboid.change_c(&new_c_in);
-
-    cuboid.display();
-}
 // ------------------------------------------------------------------------------------------------
 // Main
 //
@@ -434,5 +305,4 @@ fn main() {
     calculator_example();
     rectangle_example();
     circle_example();
-    cuboid_example();
 }
