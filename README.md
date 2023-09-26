@@ -21,9 +21,9 @@ Inside **main.rs**, let's walk through the code structure from top to bottom:
 
     - The **Shape** trait defines several functions, each corresponding to specific properties of geometric shapes (**Rectangle**, **Circle**) that are further defined in the source code. The function names are mostly self-explanatory by their names. Your task is to implement these trait functions for the given geometric objects .
 
-- **Structures** as **Geometric Objects**: Further you'll find structures representing shapes, such as **Rectangle** and **Circle**, with self-explanatory content (e.g., **Rectangle** has sides a and b). **<u>Implement the Shape trait appropriately for these objects, as properties like area differ between shapes, implement Object functions marked with TODO!.</u>**.
+- **Structures** as **Geometric Objects**: Further you'll find structures representing shapes, such as **Rectangle** and **Circle**, with self-explanatory content (e.g., **Rectangle** has sides a and b). **<u>Implement the Shape trait appropriately for these objects, as properties like area differ between shapes.</u>**
 
-- **Calculator** Struct: The Calculator is a struct that contains two operands, **x** and **y**. These operands are set when you create an instance of the **Calculator**, and mathematical functions are computed on them. **<u>Your task is to implement mathematical functions based on the provided template along with Calculator functions marked with TODO!</u>**. Additionally, it's crucial to handle **underflow** and **overflow** appropriately in your calculator, as these cases are tested in the provided tests.
+- **Calculator** Struct: The Calculator is a struct that contains two operands, **x** and **y**. These operands are set when you create an instance of the **Calculator**, and mathematical functions are computed on them. **<u>Your task is to implement mathematical functions based on the provided template.</u>** Additionally, it's crucial to handle **underflow** and **overflow** appropriately in your calculator, as these cases are tested in the provided tests.
 
 
 ## Submission Process
