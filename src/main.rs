@@ -97,7 +97,7 @@ impl Rectangle {
         todo!() // delete this todo!() macro once you are done with your implementation
     }
     /// Set side b
-    pub fn set_b(&mut self, a: &f64) -> Result<(), &'static str> {
+    pub fn set_b(&mut self, b: &f64) -> Result<(), &'static str> {
         // TODO Implement the setter method and set the field `b` of the Rectangle struct
         // Notice that the fields a and b of Rectangle struct are private and can be access only by Rectangles methods
         // If the parameter is greater or equal to zero, update it and return Ok(())
