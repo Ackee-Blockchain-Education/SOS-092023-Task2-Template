@@ -11,8 +11,6 @@ The central concept of this task revolves around creating a calculator and imple
 
 Regarding the Shapes, the goal is to familiarize yourself with Rust's concepts of structs, traits, and effectively applying object-oriented programming (OOP) principles in this language.
 
------
-
 ### Task details
 
 In the **main.rs** file, let's go through the code structure:
