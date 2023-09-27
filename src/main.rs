@@ -51,6 +51,8 @@ impl Calculator {
         // TODO Implement addition of calculator's x and y values.
         // Notice the Option<i64> return type: https://doc.rust-lang.org/std/option/index.html
         // Return None in case of under/overflow.
+        // Try to check the documentation of i64 type if you can
+        // find some useful methods: https://doc.rust-lang.org/std/primitive.i64.html#implementations
 
         todo!() // delete this todo!() macro once you are done with your implementation
     }
@@ -58,7 +60,6 @@ impl Calculator {
     pub fn subtraction(&self) -> Option<i64> {
         // TODO Implement subtraction of calculator's x and y values.
         // Return None in case of under/overflow.
-        // Try to check the documentation of i64 type if you find some useful methods: https://doc.rust-lang.org/std/primitive.i64.html#implementations
 
         todo!() // delete this todo!() macro once you are done with your implementation
     }
@@ -188,6 +189,7 @@ fn rectangle_example() {
     let new_b_in: f64 = -2.0;
 
     let res = rectangle.set_b(&new_b_in);
+
     assert_eq!(
         res.err(),
         Some("Rectangle sides must be greater or equal to zero!")
@@ -209,6 +211,7 @@ fn circle_example() {
     let new_r_in: f64 = -15.0;
 
     let res = circle.set_r(&new_r_in); // an error here will disappear once you implement the set_r method for Circle
+
     assert_eq!(
         res.err(),
         Some("Circle radius must be greater or equal to zero!")

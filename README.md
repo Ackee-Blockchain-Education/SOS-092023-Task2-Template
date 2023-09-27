@@ -14,22 +14,20 @@ Regarding the Shapes, the goal is to familiarize yourself with Rust's concepts o
 -----
 
 ### Task details
-Inside **main.rs**, let's walk through the code structure from top to bottom:
 
-- Traits **Shape** and **Display**: You will find two traits defined, **Shape** and **Display**.
-    - The **Display** trait is already implemented, and you are not supposed to modify it. It handles how the objects are displayed when printed.
+In the **main.rs** file, let's go through the code structure:
 
-    - The **Shape** trait defines several functions, each corresponding to specific properties of geometric shapes (**Rectangle**, **Circle**) that are further defined in the source code. The function names are mostly self-explanatory by their names. Your task is to implement these trait functions for the given geometric objects .
+- **Shape** Trait: You'll encounter a trait named **Shape**. This trait defines several functions related to properties of geometric shapes like **Rectangle** and **Circle**. The function names are mostly self-explanatory. Your job is to implement these functions for the respective **Geometric Objects**.
 
-- **Structures** as **Geometric Objects**: Further you'll find structures representing shapes, such as **Rectangle** and **Circle**, with self-explanatory content (e.g., **Rectangle** has sides a and b). **<u>Implement the Shape trait appropriately for these objects, as properties like area differ between shapes.</u>**
+- **Geometric Objects**: Below the **Shape** trait, you'll find structures representing shapes, such as **Rectangle** and **Circle**. These structures have clear properties (e.g., Rectangle has sides a and b). Your task is to appropriately implement the Shape trait for these objects along with corresponding struct methods marked as TODO.
 
-- **Calculator** Struct: The Calculator is a struct that contains two operands, **x** and **y**. These operands are set when you create an instance of the **Calculator**, and mathematical functions are computed on them. **<u>Your task is to implement mathematical functions based on the provided template.</u>** Additionally, it's crucial to handle **underflow** and **overflow** appropriately in your calculator, as these cases are tested in the provided tests.
+- **Calculator** Struct: Lastly, there's the **Calculator** struct, which contains two operands, x and y. When you create a Calculator instance, you'll perform mathematical operations on these operands. Your job is to implement these mathematical functions using the provided template. Additionally, it's essential to handle **underflow** and **overflow** correctly in your calculator, as these cases **are tested in the provided tests**.
 
 
 ## Submission Process
 - Implement the necessary functions and logic in **main.rs**; they are marked as **TODO!**
 - Use the provided tests in **tests.rs** to validate your code.
-- Push your work to the GitHub - Same as for Tasks before.
+- Push your work.
 
 ## Deadline
 The deadline for this task is **Tuesday, September 3rd, at 23:59 UTC**. Note that we will not accept submissions after the deadline.
@@ -41,7 +39,6 @@ We will evaluate your submission using the same test suite provided in this task
 For this Task you need to have [Rust Installed](https://www.rust-lang.org/tools/install). You don't need to worry about the installed version, as the specified Rust version inside rust-toolchain will handle that.
 
 ### Commands
-After cloning the repository, you should be able to execute the following commands:
 
 1. To compile the project, run:
 ```
